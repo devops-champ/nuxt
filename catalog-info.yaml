@@ -1,0 +1,43 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nuxt
+  description: Sample service with CI/CD
+  links:
+  - url: http://35.207.209.61/nuxt-dev/actuator/health
+    title: nuxt-dev
+    icon: web
+  - url: http://34.180.34.240/
+    title: Grafana Dashboard
+    icon: dashboard
+  annotations:
+    devlake.io/project-name: nuxt
+    github.com/project-slug: devops-champ/nuxt
+    backstage.io/techdocs-ref: dir:.
+    sonarqube.org/project-key: devops-champ_nuxt
+    roadie-backstage-pull-requests/default-filter: "is:open is:pr"
+    platform.io/argocd-dev: nuxt-dev
+    platform.io/argocd-qa: nuxt-qa
+    platform.io/argocd-prod: nuxt-prod
+    grafana/log-namespace: nuxt-dev
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/platform-team
+  dependsOn:
+    - resource:default/orders-db
+    - resource:default/kafka-cluster
+  platform:
+    AppId: ORDER-1223435
+    ApprovedJiraId: CORE-1
+    BusinessUnit: Marketing
+    SupportTeam: DEVOPS
+    CloudBudgetTicket: CR-123
+  infrastructure:
+    environments:
+      - name: dev
+        projectId: devops-champ
+      - name: qa
+        projectId: devops-champ
+      - name: prod  
+        projectId: devops-champ
